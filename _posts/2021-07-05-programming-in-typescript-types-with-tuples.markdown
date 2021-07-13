@@ -160,6 +160,18 @@ type MakeAllFuncTypes<ArgsSplit extends [unknown[], unknown[]][], RT> =
             ? [MakeFuncType<L, R, RT>, ...MakeAllFuncTypes<XS, RT>]
             : []
         : [];
+
+// [
+//     MakeFuncType<[string, number], [string], number>,
+//     MakeFuncType<[string], [number, string], number>
+// ]
+type MakeAllFuncTypesExample = MakeAllFuncTypes<
+    [
+        [[string, number], [string]],
+        [[string], [number, string]]
+    ],
+    number
+>;
 ```
 
 This peculiar use of `[...infer L]` is intended because when typing `infer L` instead, TypeScript forgets that it satisfies `unknown[]` in the `MakeFuncType` call. This is also the reason I artificially added `XS extends [unknown[], unknown[]][]` condition before recursive call.
