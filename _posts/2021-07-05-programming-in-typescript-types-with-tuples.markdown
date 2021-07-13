@@ -14,14 +14,14 @@ Conditional type is a type-level counterpart of conditional expressions with ter
 SomeType extends OtherType ? TrueType : FalseType;
 ```
 
-A simple exapmle using generics: operator that returns element type if input type is array, or type itself otherwise
+A simple example using generics: operator that returns element type if input type is array, or type itself otherwise
 ```typescript
 type Flatten<T> = T extends Array<infer E> ? E : T;
 ```
 
-The `infer` keywoard lets us introduce a new type variable `E` in the condition and leave the task of infering concrete type to TypeScript.
+The `infer` keyword lets us introduce a new type variable `E` in the condition and leave the task of infering concrete type to TypeScript.
 
-Another exapmle, an operator already defined in TypeScript library:
+Another example, an operator already defined in TypeScript library:
 
 ```typescript
 type ReturnType<F> = F extends (...args: never[]) => infer R ? R : never;
@@ -50,10 +50,10 @@ type ExampleObj = {
     foo: string;
     date: Date;
     nested: {
-        bar: null
-    },
-    qux: undefined
-}
+        bar: null;
+    };
+    qux: undefined;
+};
 
 // "foo" | "date" | "nested"
 type DefinedKeysExample = DefinedKeys<ExampleObj>;
@@ -187,7 +187,6 @@ type SemiCurry<F> = F extends (...p: infer P) => infer RT
 
 
 type FuncExample = (p1: number, p2: number, p3: string) => number[];
-type FuncExample2 = () => string;
 
 type SemiCurryExample = SemiCurry<FuncExample>;
 let f: SemiCurryExample;
